@@ -21,24 +21,35 @@
       var scene = new THREE.Scene();
 
       // 创建网格模型
-      // 各种几何体
-      // var geometry = new THREE.BoxGeometry(100, 100, 100); // 创建一个立方体几何对象
-      // 参数半径60 经纬度40，40
-      // var geometry = new THREE.SphereGeometry(60, 40, 40); // 创建一个球体几何对象
-      // 顶部直径，底部直径，高度，圆周分段数
-      // var geometry = new THREE.CylinderGeometry(50, 50, 100, 40); // 创建一个圆柱几何对象 后面在家一个参数可以变成多边形
 
-      // var geometry = new THREE.OctahedronGeometry(50); // 八面体
-
-      // var geometry = new THREE.DodecahedronGeometry(50); // 十二面体
-
-      // var geometry = new THREE.IcosahedronGeometry(50); // 二十面体
-
-      var material = new THREE.MeshLambertMaterial({
+      var geometry1 = new THREE.BoxGeometry(100, 100, 100); // 创建一个立方体几何对象
+      var material1 = new THREE.MeshLambertMaterial({
         color: 0x0000ff,
       }); // 材质对象
-      var mesh = new THREE.Mesh(geometry, material); // 网格模板对象
-      scene.add(mesh); //将网格模板添加到场景中
+      var mesh1 = new THREE.Mesh(geometry1, material1); // 网格模板对象
+      scene.add(mesh1); //将网格模板添加到场景中
+
+      var geometry2 = new THREE.SphereGeometry(60, 40, 40);
+      var material2 = new THREE.MeshLambertMaterial({
+        color: 0xffffff,
+      }); // 材质对象
+      var mesh2 = new THREE.Mesh(geometry2, material2); // 网格模板对象
+      mesh2.translateY(110);
+      scene.add(mesh2); //将网格模板添加到场景中
+
+      var geometry3 = new THREE.CylinderGeometry(50, 50, 100, 6);
+      var material3 = new THREE.MeshLambertMaterial({
+        color: 0xffff00,
+      }); // 材质对象
+      var mesh3 = new THREE.Mesh(geometry3, material3); // 网格模板对象
+      // 平移设置
+      // mesh3.translateX(95)
+      // position设置
+      mesh3.position.set(92.5, 0, 0);
+      scene.add(mesh3); //将网格模板添加到场景中
+
+      var axisHelper = new THREE.AxisHelper(250);
+      scene.add(axisHelper);
 
       // 光源设置
 

@@ -21,24 +21,44 @@
       var scene = new THREE.Scene();
 
       // 创建网格模型
-      // 各种几何体
-      // var geometry = new THREE.BoxGeometry(100, 100, 100); // 创建一个立方体几何对象
-      // 参数半径60 经纬度40，40
-      // var geometry = new THREE.SphereGeometry(60, 40, 40); // 创建一个球体几何对象
-      // 顶部直径，底部直径，高度，圆周分段数
-      // var geometry = new THREE.CylinderGeometry(50, 50, 100, 40); // 创建一个圆柱几何对象 后面在家一个参数可以变成多边形
 
-      // var geometry = new THREE.OctahedronGeometry(50); // 八面体
+      var geometry = new THREE.BufferGeometry(); //创建一个Buffer类型几何体对象
+      //类型数组创建顶点数据
+      var vertices = new Float32Array([
+        0,
+        0,
+        0, //顶点1坐标
+        50,
+        0,
+        0, //顶点2坐标
+        0,
+        100,
+        0, //顶点3坐标
+        0,
+        0,
+        10, //顶点4坐标
+        0,
+        0,
+        100, //顶点5坐标
+        50,
+        0,
+        10, //顶点6坐标
+      ]);
+      // 创建属性缓冲区对象
+      var attribue = new THREE.BufferAttribute(vertices, 3); //3个为一组，表示一个顶点的xyz坐标
+      // 设置几何体attributes属性的位置属性
+      geometry.attributes.position = attribue;
 
-      // var geometry = new THREE.DodecahedronGeometry(50); // 十二面体
+      // 三角面(网格)渲染模式
+      var material = new THREE.MeshBasicMaterial({
+        color: 0x0000ff, //三角面颜色
+        side: THREE.DoubleSide, //两面可见
+      }); //材质对象
+      var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
+      scene.add(mesh); //网格模型添加到场景中
 
-      // var geometry = new THREE.IcosahedronGeometry(50); // 二十面体
-
-      var material = new THREE.MeshLambertMaterial({
-        color: 0x0000ff,
-      }); // 材质对象
-      var mesh = new THREE.Mesh(geometry, material); // 网格模板对象
-      scene.add(mesh); //将网格模板添加到场景中
+      var axisHelper = new THREE.AxisHelper(250);
+      scene.add(axisHelper);
 
       // 光源设置
 
@@ -46,7 +66,11 @@
       var point = new THREE.PointLight(0xffffff);
       point.position.set(400, 200, 300); //点光源位置
       scene.add(point); //点光源添加到场景中
-      //环境光
+      var point2 = new THREE.PointLight(0xffffff);
+      point2.position.set(-400, -200, -300); //点光源位置
+      scene.add(point2); //点光源添加到场景中
+
+      //环境光 环境光与网络模型的颜色进行rgb乘法计算
       var ambient = new THREE.AmbientLight(0x444444);
       scene.add(ambient);
 
